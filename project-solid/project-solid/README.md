@@ -36,6 +36,14 @@ Esta estructura mejora la mantenibilidad porque cada módulo tiene una única ra
 ### Conclusión
 La refactorización demuestra que SRP no consiste solo en mover métodos, sino en identificar responsabilidades reales y aislarlas. Esto hace el sistema más legible, testeable y preparado para cambios futuros.
 
+## Investigación sobre Refresh Tokens
+
+1. **¿Cómo resuelve el Refresh Token la experiencia del usuario con JWT stateless?**
+   Un JWT de acceso con expiración corta (por ejemplo 1 minuto) evita que un token comprometido permanezca válido mucho tiempo. Sin embargo, obligaría al usuario a autenticarse repetidamente. Un refresh token permite obtener un nuevo access token sin pedir credenciales otra vez, manteniendo la seguridad porque el refresh token puede tener una vida más larga, almacenarse de forma segura y revocarse si aparece sospecha.
+
+2. **¿Dónde se debe almacenar el refresh token?**
+   Según las buenas prácticas, el refresh token debe almacenarse en el servidor o en un almacenamiento seguro del lado del cliente, dependiendo del modelo de la aplicación. En arquitecturas web modernas, lo más seguro es almacenar el refresh token en una cookie HttpOnly y Secure, con el atributo SameSite adecuado, y manejar su ciclo de vida en el servidor mediante revocación, rotación y expiración controlada.
+
 ## Evidencia de entrega
 - Rama de trabajo: `feature/srp-refactor`
 - Commits semánticos realizados: `init`, `refactor`, `refactor`, `refactor`, `refactor`
